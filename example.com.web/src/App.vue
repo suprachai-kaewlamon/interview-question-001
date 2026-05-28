@@ -7,7 +7,8 @@ const API_URL = 'http://localhost:5188/api/employees';
 
 interface Employee {
   id?: number;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   address: string;
   dateOfBirth: string;
 }
@@ -70,7 +71,8 @@ const saveEmployee = async () => {
     const combinedFullName = `${newEmployee.value.firstName} ${newEmployee.value.lastName}`.trim();
 
     const payload = {
-      fullName: combinedFullName,
+      firstName: newEmployee.value.firstName,
+      lastName: newEmployee.value.lastName,
       address: newEmployee.value.address,
       dateOfBirth: new Date(newEmployee.value.dateOfBirth).toISOString()
     };
@@ -87,9 +89,11 @@ const saveEmployee = async () => {
 </script>
 
 <template>
+  <div class="header">
+    <h1>ระบบจัดการข้อมูลพนักงาน IT 01</h1>
+  </div>
   <div class="container">
-    <div class="header">
-      <h2>ระบบจัดการข้อมูลพนักงาน</h2>
+    <div class="action-bar">
       <button class="btn btn-add" @click="openAddModal">เพิ่มพนักงานใหม่</button>
     </div>
     
@@ -108,7 +112,7 @@ const saveEmployee = async () => {
         <tbody>
           <tr v-for="(emp, index) in employees" :key="emp.id">
             <td>{{ index + 1 }}</td>
-            <td>{{ emp.fullName }}</td>
+            <td>{{ emp.firstName }} {{ emp.lastName }}</td>
             <td>{{ emp.address }}</td>
             <td>{{ new Date(emp.dateOfBirth).toLocaleDateString('th-TH') }}</td>
             <td>{{ calculateAgeDetail(emp.dateOfBirth) }}</td>
@@ -160,7 +164,7 @@ const saveEmployee = async () => {
         <h3>รายละเอียดพนักงาน</h3>
         <div class="form-group">
           <label>ชื่อ-นามสกุล:</label>
-          <input type="text" :value="selectedEmployee?.fullName" disabled class="disabled-input" />
+          <input type="text" :value="`${selectedEmployee?.firstName} ${selectedEmployee?.lastName}`" disabled class="disabled-input" />
         </div>
         <div class="form-group">
           <label>วันเกิด:</label>
@@ -195,18 +199,22 @@ const saveEmployee = async () => {
   font-family: Arial, sans-serif;
 }
 .header {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  background-color: #00b050;
+  width: 100%;
+  text-align: center;
+  padding: 2px 0;
   margin-bottom: 20px;
 }
 .header h2 {
-  font-size: 24px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
   margin: 0;
+}
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
 }
 .table-responsive {
   width: 100%;
@@ -223,11 +231,11 @@ th, td {
   text-align: center;
 }
 th {
-  background-color: #f2f2f2;
+  background-color: #3fe6f2;
 }
 .empty-text {
   text-align: center;
-  color: #888;
+  color: #888888;
   padding: 20px;
 }
 .btn {
@@ -237,9 +245,9 @@ th {
   cursor: pointer;
   color: #fff;
 }
-.btn-add { background-color: #28a745; }
+.btn-add { background-color: #176db8; }
 .btn-cancel { background-color: #dc3545; }
-.btn-info { background-color: #17a2b8; }
+.btn-info { background-color: #176db8; }
 .btn:hover { opacity: 0.9; }
 
 .modal-overlay {
