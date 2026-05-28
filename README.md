@@ -1,4 +1,4 @@
-# Employee Management System (example.com)
+# Employee Management Age System (example.com)
 
 This repository contains the source code for the technical assessment (interview-question-001). It is a full-stack web application designed to manage employee records with an automated age calculation feature.
 
