@@ -4,7 +4,7 @@ This repository contains the source code for the technical assessment (interview
 
 ## Tech Stack
 - **Frontend:** Vue 3 , TypeScript, Vite, SweetAlert2
-- **Backend:** C# (.NET 8)
+- **Backend:** C#
 - **Database:** PostgreSQL
 
 ## Prerequisites
